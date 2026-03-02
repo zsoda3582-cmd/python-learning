@@ -24,4 +24,4 @@
 - 列表基础
 - 列表操作
 - 购物车程序
-- 小项目<img width="355" height="190" alt="image" src="https://github.com/user-attachments/assets/14ed6d4c-411f-4fcb-9881-6c0e1fabbbf8" />
+- To-Do小项目
