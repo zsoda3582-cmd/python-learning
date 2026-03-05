@@ -32,3 +32,9 @@
 - 字符串常用方法（strip / split / replace / find）
 - 字典基础（增删改查）
 - 小项目：单词统计器
+
+## Day06
+
+- 文件读写
+- try-except 基础
+- 迷你记账本项目
