@@ -72,3 +72,16 @@
 - 分析了舱位与生存率的关系
 - 分析了年龄组与生存率的关系
 - 分析了票价组与生存率的关系，并绘制了散点图
+
+第一个小项目完成！
+学到了：
+- read_csv
+- head / shape / columns
+- value_counts
+- groupby + mean
+- pd.cut
+- plot(kind="bar")
+- hist()
+- scatter()
+现在还不够顺手，这很正常，因为熟练不是靠“听懂”，而是靠“再做 1~2 个类似项目”，
+继续加油！
