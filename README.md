@@ -85,3 +85,34 @@
 - scatter()
 现在还不够顺手，这很正常，因为熟练不是靠“听懂”，而是靠“再做 1~2 个类似项目”，
 继续加油！
+
+## Day10 Student Scores 数据分析项目（分两天完成的）
+
+- 使用 pandas 读取学生成绩数据
+- 查看数据结构 (shape / columns / head)
+- 计算各科平均分 (mean)
+- 按性别分组分析成绩 (groupby + mean)
+- 使用 matplotlib 绘制可视化图表
+- 柱状图（性别 vs 平均成绩）
+- 直方图（数学成绩分布）
+- 散点图（数学 vs 英语成绩关系）
+
+进一步扩展分析：
+- 极值分析
+- 找到各科最高分和最低分 (max / min)
+- 创建新列 Total（总成绩）
+- 找到总成绩最高的学生 (idxmax + loc)
+- 分析总成绩分布（直方图）
+- 分析科目之间关系（散点图）
+- Math vs Python
+- English vs Python
+- 使用 describe() 查看完整统计信息
+
+巩固 & 学到了了函数的使用：
+- max()
+- min()
+- describe()
+- 创建新列 df["Total"]
+- idxmax()
+- loc
+- matplotlib 可视化练习
