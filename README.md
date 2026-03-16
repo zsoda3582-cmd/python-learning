@@ -129,3 +129,26 @@
 
 这个项目让我更加熟悉数据分析的基本流程：
 读取数据 → 数据探索 → 统计分析 → 可视化 → 得出结论。
+
+
+## Day11 Netflix 数据分析 day1
+
+今天完成：
+- 使用 pandas 读取 Netflix 数据
+- 查看数据结构（shape / columns / head）
+- 使用 describe() 查看数据统计信息
+- 统计 Movie / TV Show 数量（value_counts()）
+- 使用柱状图展示不同类型影视作品数量
+- 分析 Netflix 各年份发布作品数量趋势
+- 使用折线图可视化内容增长趋势
+- 使用 str.contains() 搜索标题关键词
+- 分析 Netflix 内容来源国家
+- 使用 split() + explode() 统计前 10 国家并绘制柱状图
+
+学到：
+- value_counts()
+- str.contains()
+- str.split()
+- explode()
+- plot(kind="bar")
+- 折线图趋势分析
