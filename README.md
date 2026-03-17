@@ -152,3 +152,30 @@
 - explode()
 - plot(kind="bar")
 - 折线图趋势分析
+
+## Day12 Netflix 数据分析 day2
+
+今天完成：
+- 分析 Netflix 内容分级（rating）分布
+- 使用 value_counts() 统计不同 rating 数量
+- 发现 rating 列中存在异常值（如 "74 min"）
+- 清洗异常数据，保留正常 rating 数据
+- 将 rating 合并为三类：Kids / Teen / Adult
+- 使用 apply() 创建新列 Rating_Group
+- 统计 Kids / Teen / Adult 三类内容数量并绘制柱状图
+- 分析不同内容类型（Kids / Teen / Adult）随年份变化趋势
+- 使用 groupby() + size() + unstack() 整理数据并绘制折线图
+
+学到：
+- 数据清洗
+- apply()
+- 自定义分类函数
+- groupby()
+- size()
+- unstack()
+- 分类统计与趋势分析
+
+小结：
+- Netflix 平台以 Adult 内容为主，其次是 Teen，Kids 较少
+- rating 数据中存在异常值，分析前需要先清洗
+- 不同内容类型可以通过分组和折线图观察年份变化趋势
