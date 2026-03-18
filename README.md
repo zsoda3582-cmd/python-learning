@@ -179,3 +179,23 @@
 - Netflix 平台以 Adult 内容为主，其次是 Teen，Kids 较少
 - rating 数据中存在异常值，分析前需要先清洗
 - 不同内容类型可以通过分组和折线图观察年份变化趋势
+
+## Day13 Titanic ML 项目 day1
+
+今天完成：
+- 复习 pandas 基础操作（shape / head / 列选择）
+- 使用 pandas 读取 Titanic 数据
+- 划分 X / y
+- 使用 train_test_split 划分数据集
+- 使用 model.fit 训练模型
+- 使用 model.predict 进行预测
+
+学到：
+- 机器学习基本流程（数据 → 训练 → 预测）
+- fit：学习规律
+- predict：做预测
+- 预测只用 X，不用 y
+
+小结：
+- 跑通 Titanic 基础 ML 流程
+- 还未进行数据处理和模型评估
