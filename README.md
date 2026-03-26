@@ -214,3 +214,62 @@
 - 特征工程对模型影响很大
 - 单次结果不可靠，需要交叉验证
 - 不同模型在不同特征下表现不同
+
+
+## Day15 Housing Price Prediction (California Housing)
+
+# 项目简介：本项目基于 sklearn 提供的 California Housing 数据集，构建机器学习模型对房价进行预测，并比较不同模型的表现。
+---
+# 数据集
+- 来源：sklearn.datasets.fetch_california_housing
+- 特征包括：
+  - MedInc（收入）
+  - HouseAge（房龄）
+  - AveRooms（平均房间数）
+  - Latitude / Longitude（地理位置）等
+
+目标变量：
+- Price（房价）
+
+# 数据分析（EDA）
+- 数据无缺失值
+- 所有特征为数值型
+- 相关性分析显示：
+  - MedInc 与房价相关性最高
+
+# 模型对比
+1️⃣ 线性回归（Linear Regression）
+- MSE ≈ 0.556
+特点：
+- 简单
+- 可解释性强
+- 但无法处理复杂非线性关系
+---
+2️⃣ 随机森林（Random Forest）
+- MSE ≈ 0.255
+特点：
+- 能捕捉非线性关系
+- 明显优于线性模型
+---
+# 简单调参
+| 模型 | MSE |
+|------|-----|
+| RandomForest (50 trees) | ~0.257 |
+| RandomForest (100 trees) | ~0.255 |
+
+结论：
+- 树数量增加带来小幅提升
+- 存在性能与速度的权衡
+---
+# 特征重要性分析
+Top features：
+- MedInc（最重要）
+- AveOccup
+- Latitude / Longitude
+说明：收入和地理位置对房价影响最大
+
+---
+# 项目总结
+- 房价预测问题具有明显非线性特征
+- 随机森林模型显著优于线性回归
+- 模型选择比简单调参更重要
