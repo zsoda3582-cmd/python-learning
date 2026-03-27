@@ -218,26 +218,13 @@
 
 ## Day15 Housing Price Prediction (California Housing)
 
-# 项目简介：本项目基于 sklearn 提供的 California Housing 数据集，构建机器学习模型对房价进行预测，并比较不同模型的表现。
----
-# 数据集
-- 来源：sklearn.datasets.fetch_california_housing
-- 特征包括：
-  - MedInc（收入）
-  - HouseAge（房龄）
-  - AveRooms（平均房间数）
-  - Latitude / Longitude（地理位置）等
-
-目标变量：
-- Price（房价）
-
-# 数据分析（EDA）
+数据分析（EDA）
 - 数据无缺失值
 - 所有特征为数值型
 - 相关性分析显示：
   - MedInc 与房价相关性最高
 
-# 模型对比
+模型对比
 1️⃣ 线性回归（Linear Regression）
 - MSE ≈ 0.556
 特点：
@@ -251,7 +238,7 @@
 - 能捕捉非线性关系
 - 明显优于线性模型
 ---
-# 简单调参
+简单调参
 | 模型 | MSE |
 |------|-----|
 | RandomForest (50 trees) | ~0.257 |
@@ -261,7 +248,7 @@
 - 树数量增加带来小幅提升
 - 存在性能与速度的权衡
 ---
-# 特征重要性分析
+特征重要性分析
 Top features：
 - MedInc（最重要）
 - AveOccup
@@ -269,7 +256,31 @@ Top features：
 说明：收入和地理位置对房价影响最大
 
 ---
-# 项目总结
+项目总结
 - 房价预测问题具有明显非线性特征
 - 随机森林模型显著优于线性回归
 - 模型选择比简单调参更重要
+
+## Day16 House Prices ML 项目（Advanced Regression）
+今天完成：
+* 使用 pandas 读取 Kaggle 房价数据（train / test）
+* 使用 seaborn 绘制 `SalePrice` 分布图
+* 发现房价数据呈右偏分布，对 `SalePrice` 进行 `log` 变换，使分布更接近正态
+* 统计各特征缺失值情况（按缺失数量排序）
+* 处理缺失值：
+  * 类别型特征：填充 `"None"`（表示没有该属性）
+  * 数值型特征：使用 `median` 填充
+* 使用 `pd.get_dummies()` 进行特征编码（类别 → 数值）
+* 数据维度变化：
+  * 原始特征：81
+  * 编码后特征：631
+* 划分训练集 / 测试集（train_test_split）
+* 训练模型：
+  * Ridge 回归
+  * Lasso 回归（调参 alpha=0.001）
+
+小结：
+* 跑通了房价预测完整流程（EDA → 数据处理 → 建模）
+* 初步理解了正则化模型（Ridge / Lasso）
+* Lasso 从 631 个特征中筛选出约 91 个有效特征
+* 模型效果已有明显提升
