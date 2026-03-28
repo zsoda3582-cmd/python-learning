@@ -261,7 +261,7 @@ Top features：
 - 随机森林模型显著优于线性回归
 - 模型选择比简单调参更重要
 
-## Day16 House Prices ML 项目（Advanced Regression）
+## Day16 House_Price_Advanced_project_day01
 今天完成：
 * 使用 pandas 读取 Kaggle 房价数据（train / test）
 * 使用 seaborn 绘制 `SalePrice` 分布图
@@ -284,3 +284,27 @@ Top features：
 * 初步理解了正则化模型（Ridge / Lasso）
 * Lasso 从 631 个特征中筛选出约 91 个有效特征
 * 模型效果已有明显提升
+
+## Day17 House_Price_Advanced_project_day02
+继续完善模型与优化：
+- Lasso 调参（alpha）：尝试不同 alpha 值（0.1 → 0.0001）。观察模型分数变化，发现：
+    alpha 过大 → 约束过强 → 欠拟合 → 分数下降
+    alpha 过小 → 约束过弱 → 可能过拟合
+    存在一个最优区间（本实验约在 0.003 左右）
+- 模型理解加深
+    alpha 控制特征筛选强度
+    Lasso 可以自动进行特征筛选（使部分特征系数变为 0）
+- 特征工程：新增特征：TotalSF = GrLivArea + TotalBsmtSF（房屋总面积）
+                    HouseAge = YrSold - YearBuilt（房龄）
+  目的：构造更有意义的特征，提高模型表达能力
+- 数据标准化：使用 StandardScaler
+    让不同特征处于相同尺度，避免某些特征影响过大，对 Lasso 收敛和效果有明显提升
+- 收敛问题优化
+    调整 max_iter（迭代次数）
+    解决 Lasso 的收敛警告（Objective did not converge）
+
+小结
+- 理解了 Lasso 中 alpha 的作用（不是越小越好，而是存在最优值）
+- 掌握了基本调参思路（固定数据 → 改参数 → 看结果）
+- 初步理解特征工程的重要性（可以显著影响模型表现）
+- 标准化 + 调参 可以明显提升模型稳定性和效果
