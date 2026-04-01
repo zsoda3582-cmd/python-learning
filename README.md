@@ -336,8 +336,8 @@ Top features：
 
 - Threshold 调整（核心部分）:默认模型使用 threshold = 0.5，但在实际任务中,不同 threshold 会影响 precision 和 recall 的平衡
 
-本项目通过：1.遍历多个 threshold（0 ~ 1）;2.在 **recall ≥ 0.95** 的前提下;3.选择 **precision 最大** 的 threshold ,用以上3步来确定最合适的分类阈值
-调整 threshold 后，模型表现为：recall ≈ 98%+ precision ≈ 95%+  accuracy ≈ 96%+
+- 本项目通过：1.遍历多个 threshold（0 ~ 1）;2.在 **recall ≥ 0.95** 的前提下;3.选择 **precision 最大** 的 threshold ,用以上3步来确定最合适的分类阈值
+- 调整 threshold 后，模型表现为：recall ≈ 98%+ precision ≈ 95%+  accuracy ≈ 96%+
 
 👉 说明模型能够：几乎不漏诊（recall高）、同时误报也控制在合理范围（precision不低）
 
