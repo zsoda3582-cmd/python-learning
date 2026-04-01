@@ -315,3 +315,39 @@ Top features：
 - 用了什么模型（Ridge模型做的是L2正则化，会降低模型特征的系数，但不会直接置为0；Lasso会把某些特征系数直接置为0来做特征筛选）
 - 调参结论（alpha越大，模型对特征约束越强；alpha越小约束越弱。经实验，验证了本环境下alpha ≈ 0.003 最好）
 - 学到的最重要三点（1.数据处理是更重要的，而模型训练只占很小一部分，大部分精力都在处理数据，这是我新学到的很重要甚至颠覆我对机器学习的认知的知识！2.标准化很重要，但这个知识点不像我对alpha这种直白的、很显示就能看出差别的参数理解的这么全面，后面还希望继续练习；3.别放弃，永远记住一点：I can handle it!）
+
+## Day19+20 Breast_Cancer_Classification_XGBoost 项目
+
+- 项目目标:本项目是一个二分类问题，基于乳腺癌数据集，预测患者是否患癌。在本项目中，不仅关注模型整体准确率（accuracy），更重要的是：在医疗场景下，尽量减少漏诊（false negative），因此优先优化 recall。
+- 使用模型
+
+- 使用模型：XGBoost（集成学习方法，性能较强）
+    - 训练方式：train_test_split 划分训练集 / 测试集
+    - 主要参数：n_estimators、max_depth = 3、learning_rate = 0.1
+- 评估指标（重点理解）
+    - **precision（精确率）**  
+      被预测为“患癌”的样本中，实际为患癌的比例  👉 关注：是否乱报
+    - **recall（召回率）**  
+      所有真实患癌样本中，被正确预测出来的比例  👉 关注：是否漏诊（最重要）
+    - **accuracy（准确率）**  
+      所有预测中，预测正确的比例  👉 但在本任务中不是最关键指标
+    - **confusion_matrix（混淆矩阵）**  
+      用于分析 TP / FP / FN / TN 的具体情况
+
+- Threshold 调整（核心部分）:默认模型使用 threshold = 0.5，但在实际任务中,不同 threshold 会影响 precision 和 recall 的平衡
+
+本项目通过：1.遍历多个 threshold（0 ~ 1）;2.在 **recall ≥ 0.95** 的前提下;3.选择 **precision 最大** 的 threshold ,用以上3步来确定最合适的分类阈值
+调整 threshold 后，模型表现为：recall ≈ 98%+ precision ≈ 95%+  accuracy ≈ 96%+
+
+👉 说明模型能够：几乎不漏诊（recall高）、同时误报也控制在合理范围（precision不低）
+
+
+- 项目总结
+
+通过本项目，我完成了：
+
+- 基础分类模型训练（XGBoost）
+- precision / recall / accuracy 的理解与应用
+- confusion matrix 的分析
+- threshold 调整与模型行为控制
+- 从“跑模型”到“根据任务目标优化模型”的转变
