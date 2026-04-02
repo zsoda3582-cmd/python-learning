@@ -1,5 +1,3 @@
-<img width="640" height="480" alt="Figure_1" src="https://github.com/user-attachments/assets/ce20c2cc-9d87-49dd-9a88-cb711f2c0600" /># Python Learning Log
-
 ## Day01
 - 基础输入输出
 - BMI 计算
