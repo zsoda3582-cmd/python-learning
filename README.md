@@ -363,3 +363,60 @@ Top features：
 2.掌握类别特征编码:使用 `pd.get_dummies()` 进行 One-Hot 编码, `drop_first=True`：去掉重复信息（避免多重共线性）， 最终特征数：约 30 个
 3.理解 precision / recall 的权衡关系： threshold ↓ → recall ↑（少漏人），threshold ↓ → precision ↓（多误判）， 本质是：模型决策标准的调整
 4.能通过 threshold 主动控制模型行为
+
+好，这次我给你写一个**干净、精简、像你之前风格的 README**，你可以直接复制用👇
+
+---
+
+## Day22 Credit_Risk_Prediction（信用风险预测）
+
+# 项目目标
+* 预测贷款用户是否违约（loan_status）
+* 优化模型在 precision / recall 之间的平衡
+
+---
+# 数据处理
+* 删除目标列：`loan_status`
+* 类别特征：`pd.get_dummies()` 编码
+* 划分数据集：`train_test_split(test_size=0.2, stratify=y)`
+
+---
+# 模型
+* 使用模型：XGBoost
+* 评估指标：
+  * accuracy
+  * precision
+  * recall
+  * confusion matrix
+    
+---
+# Threshold 调整
+* 通过 `predict_proba` 获取概率
+* 手动调整 threshold（0.2 / 0.3 / 0.7 / 0.8）
+* 观察 precision 与 recall 的变化
+
+👉 结论：
+* threshold ↓ → recall ↑，precision ↓
+* threshold ↑ → precision ↑，recall ↓
+
+---
+# 可视化分析
+* 绘制 Precision / Recall 随 threshold 变化曲线
+* 观察两者的 trade-off（取舍关系）
+
+---
+# 最优 threshold（F1）
+* 自动计算 F1 score（precision + recall 平衡）
+* 最优结果：
+```text
+threshold ≈ 0.46
+precision ≈ 0.88
+recall ≈ 0.83
+```
+
+---
+# 小结
+* 理解了 precision / recall 的本质区别
+* 掌握了 threshold 调整方法
+* 学会用可视化分析模型决策
+* 初步理解“模型效果 vs 业务目标”的关系
