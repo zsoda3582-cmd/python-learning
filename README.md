@@ -352,14 +352,14 @@ Top features：
 - threshold 调整与模型行为控制
 - 从“跑模型”到“根据任务目标优化模型”的转变
 
-## Day21+22 Telco_Customer_Churn_XGBoost 项目
+## Day21 Telco_Customer_Churn_XGBoost 项目
 
 - 项目目标
-* 预测用户是否流失（Churn）
-* 在模型基础上理解 **precision / recall / threshold 的关系**
+1.预测用户是否流失（Churn）
+2.在模型基础上理解 **precision / recall / threshold 的关系**
 
 - 项目总结
-* 学会处理真实数据问题（隐藏缺失值）：TotalCharges 是字符串（含空格）——处理方式：1. 空字符串 → None 2.再 转换为 float 3.删除缺失值；删除无用特征：customerID（避免无意义编码）
-* 掌握类别特征编码:使用 `pd.get_dummies()` 进行 One-Hot 编码, `drop_first=True`：去掉重复信息（避免多重共线性）， 最终特征数：约 30 个
-* 理解 precision / recall 的权衡关系： threshold ↓ → recall ↑（少漏人），threshold ↓ → precision ↓（多误判）， 本质是：模型决策标准的调整
-* 能通过 threshold 主动控制模型行为
+1.学会处理真实数据问题（隐藏缺失值）：TotalCharges 是字符串（含空格）——处理方式：1. 空字符串 → None 2.再 转换为 float 3.删除缺失值；删除无用特征：customerID（避免无意义编码）
+2.掌握类别特征编码:使用 `pd.get_dummies()` 进行 One-Hot 编码, `drop_first=True`：去掉重复信息（避免多重共线性）， 最终特征数：约 30 个
+3.理解 precision / recall 的权衡关系： threshold ↓ → recall ↑（少漏人），threshold ↓ → precision ↓（多误判）， 本质是：模型决策标准的调整
+4.能通过 threshold 主动控制模型行为
