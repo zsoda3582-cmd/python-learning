@@ -1,4 +1,4 @@
-# Python Learning Log
+<img width="640" height="480" alt="Figure_1" src="https://github.com/user-attachments/assets/ce20c2cc-9d87-49dd-9a88-cb711f2c0600" /># Python Learning Log
 
 ## Day01
 - 基础输入输出
@@ -413,8 +413,7 @@ threshold ≈ 0.46
 precision ≈ 0.88
 recall ≈ 0.83
 ```
-![Uploading Figure_1.png…]()
-
+<img width="640" height="480" alt="Figure_1" src="https://github.com/user-attachments/assets/e6b64155-c6e8-4542-bc99-cf87a48c9ea5" />
 
 ---
 # 小结
