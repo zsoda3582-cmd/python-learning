@@ -365,57 +365,75 @@ Top features：
 好，这次我给你写一个**干净、精简、像你之前风格的 README**，你可以直接复制用👇
 
 ---
-
 ## Day22 Credit_Risk_Prediction（信用风险预测）
-
+---
 # 项目目标
 * 预测贷款用户是否违约（loan_status）
-* 优化模型在 precision / recall 之间的平衡
+* 理解模型在不同特征变化下的决策行为
+* 在 precision / recall 之间找到合适的平衡点
 
 ---
 # 数据处理
 * 删除目标列：`loan_status`
 * 类别特征：`pd.get_dummies()` 编码
 * 划分数据集：`train_test_split(test_size=0.2, stratify=y)`
-
 ---
+
 # 模型
 * 使用模型：XGBoost
-* 评估指标：
-  * accuracy
-  * precision
-  * recall
-  * confusion matrix
-    
+* 输出：违约概率（`predict_proba`）
+
+# 评价指标：
+* accuracy
+* precision
+* recall
+* confusion matrix
 ---
+
 # Threshold 调整
-* 通过 `predict_proba` 获取概率
-* 手动调整 threshold（0.2 / 0.3 / 0.7 / 0.8）
+* 通过 `predict_proba` 获取预测概率
+* 手动测试多个 threshold（0.3 / 0.7 / 0.8 等）
 * 观察 precision 与 recall 的变化
 
 👉 结论：
 * threshold ↓ → recall ↑，precision ↓
 * threshold ↑ → precision ↑，recall ↓
-
 ---
+
 # 可视化分析
 * 绘制 Precision / Recall 随 threshold 变化曲线
-* 观察两者的 trade-off（取舍关系）
+* 观察两者的 trade-off（权衡关系）
+<img width="640" height="480" alt="Figure_1" src="https://github.com/user-attachments/assets/e3e4e592-3f66-406f-8975-a5298c5c3821" />
 
 ---
 # 最优 threshold（F1）
-* 自动计算 F1 score（precision + recall 平衡）
-* 最优结果：
-```text
-threshold ≈ 0.46
-precision ≈ 0.88
-recall ≈ 0.83
+* 使用 F1 score（precision + recall 的平衡）选择最佳 threshold
 ```
-<img width="640" height="480" alt="Figure_1" src="https://github.com/user-attachments/assets/e6b64155-c6e8-4542-bc99-cf87a48c9ea5" />
+threshold ≈ 0.46  
+precision ≈ 0.88  
+recall ≈ 0.83  
+```
+---
+
+## What-if 分析（模型行为分析）
+👉 思路：固定一个客户，只改变单个特征，观察模型预测变化
+
+# 收入（person_income）分析
+* 改变收入，同时同步调整 `loan_percent_income`
+* 观察违约概率变化
+👉 结论：
+* 收入较高时 → 风险较低
+* 收入下降时 → 风险逐步上升
+* 当收入较低且贷款占比高时 → 风险急剧上升
+* 模型反应不是完全平滑（树模型的分段特性）
+# 实验图
+<img width="753" height="500" alt="Figure_2" src="https://github.com/user-attachments/assets/2aa132f1-e4ee-4b66-a561-2c1ace8787d7" />
+---
+# 核心结论
+* `loan_percent_income`（贷款占收入比例）是关键风险因素
+* 极端输入会导致模型输出剧烈变化
+* XGBoost（树模型）对特征变化的响应是非线性的
+* 模型解释（what-if 分析）比单纯准确率更重要
 
 ---
-# 小结
-* 理解了 precision / recall 的本质区别
-* 掌握了 threshold 调整方法
-* 学会用可视化分析模型决策
-* 初步理解“模型效果 vs 业务目标”的关系
+
