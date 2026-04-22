@@ -614,3 +614,21 @@ for t in thresholds:
 * 能基于业务目标优化模型
 
 ---
+## 🔍 模型对比分析（Logistic vs XGBoost）
+在本项目中，对比了线性模型（Logistic Regression）与树模型（XGBoost）在客户流失预测任务中的表现。
+
+# 1️⃣ Logistic Regression
+- 作为 baseline 模型
+- 优点：结构简单、可解释性强
+- 表现：Precision 较高，但 Recall 偏低
+- 特点：偏保守，容易漏掉流失用户
+
+# 2️⃣ XGBoost
+- 作为升级模型
+- 优点：能够捕捉非线性关系与特征组合
+- 表现：Recall 提升，Precision 略有下降
+- 特点：更偏激进，抓取流失用户能力更强
+
+# 综合结论
+在 churn 预测场景中，更关注 Recall（减少漏判），因此 XGBoost 更适合作为实际应用模型。
+同时，通过 threshold tuning，可以进一步在 Precision 和 Recall 之间进行权衡，实现业务目标优化。
