@@ -1,3 +1,4 @@
+#4.21学习，基础line
 from unicodedata import numeric
 import pandas as pd
 df = pd.read_csv("telco.csv")
@@ -69,17 +70,17 @@ x_train,x_test,y_train,y_test = train_test_split(
     stratify = y
 )
 
-#建模 + 预测
-from sklearn.linear_model import LogisticRegression
-model = LogisticRegression(max_iter=1000)
-model.fit(x_train,y_train)
-y_pred = model.predict(x_test)
+# #建模 + 预测
+# from sklearn.linear_model import LogisticRegression
+# model = LogisticRegression(max_iter=1000)
+# model.fit(x_train,y_train)
+# y_pred = model.predict(x_test)
 
-#评估
-from sklearn.metrics import accuracy_score,precision_score,recall_score
-print("Accuracy:",accuracy_score(y_test,y_pred))
-print("Precision:",precision_score(y_test,y_pred))
-print("Recall:",recall_score(y_test,y_pred))
+# #评估
+# from sklearn.metrics import accuracy_score,precision_score,recall_score
+# print("Accuracy:",accuracy_score(y_test,y_pred))
+# print("Precision:",precision_score(y_test,y_pred))
+# print("Recall:",recall_score(y_test,y_pred))
 """
 初步结论：
 1.Accuracy = 0.804：模型整体预测对了大约 80.4%
@@ -87,3 +88,52 @@ print("Recall:",recall_score(y_test,y_pred))
 3.Recall = 0.575：在所有真正会流失的用户里，模型找出来了大约 57.5%，说明模型仍会漏掉一部分真实流失用户。
 因此，该模型可以作为客户流失预测的 baseline，但后续仍有优化空间。
 """
+
+#4.22建模 + 重新预测
+from sklearn.linear_model import LogisticRegression
+model = LogisticRegression(max_iter=1000)
+model.fit(x_train,y_train)
+y_prob = model.predict_proba(x_test)[:,1]
+
+#评估
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import accuracy_score,precision_score,recall_score,f1_score
+thresholds = np.linspace(0,1,50)
+precisions = []
+recalls = []
+f1_scores = []
+for t in thresholds:
+    y_pred_new = (y_prob > t).astype(int)
+    precisions.append(precision_score(y_test,y_pred_new))
+    recalls.append(recall_score(y_test,y_pred_new))
+    f1_scores.append(f1_score(y_test,y_pred_new))
+
+best_index = np.argmax(f1_scores)
+best_threshold = thresholds[best_index]
+best_f1 = f1_scores[best_index]
+print("Best_threshold",best_threshold)
+print("Best_f1",best_f1)
+
+plt.plot(thresholds,precisions,label = "Precisions")
+plt.plot(thresholds,recalls,label = "Recall")
+plt.legend()
+plt.xlabel("Threshold")
+plt.ylabel("Score")
+plt.title("Precision vs Recall")
+plt.grid()
+plt.show()
+
+plt.plot(thresholds,f1_scores,label = "F1_score")
+plt.axvline(best_threshold,linestyle="--",label="Best Threshold")
+plt.legend()
+plt.xlabel("Threshold")
+plt.ylabel("F1_score")
+plt.title("F1_score vs threshold")
+plt.grid()
+plt.show()
+
+y_pred_fina = (y_prob > best_threshold).astype(int)
+from sklearn.metrics import classification_report,confusion_matrix
+print("confusion_matrix\n",confusion_matrix(y_test,y_pred_fina))
+print("classification_report\n",classification_report(y_test,y_pred_fina))
