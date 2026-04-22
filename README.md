@@ -548,7 +548,7 @@ df.groupby("Churn")["tenure"].mean()
   * Precision / Recall 的业务含义
   * 特征与业务之间的联系
 ---
-## Day24-2：模型优化（Threshold Tuning）
+## Day24-2：Telco Customer Churn Prediction v1 收尾————模型优化（Threshold Tuning）
 
 # 问题背景
 
