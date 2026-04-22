@@ -460,7 +460,7 @@ recall ≈ 0.83
 * 模型对低信用分样本更敏感
 * 一旦达到安全区间，模型不再区分细微差异
 
-## Day24 Telco Churn Prediction（客户流失预测）
+## Day24-1 Telco Churn Prediction（客户流失预测）
 # 项目目标：预测客户是否会流失（Churn = Yes / No）
 
 ---
@@ -547,4 +547,70 @@ df.groupby("Churn")["tenure"].mean()
 * 理解：
   * Precision / Recall 的业务含义
   * 特征与业务之间的联系
+---
+## Day24-2：模型优化（Threshold Tuning）
+
+# 问题背景
+
+在 baseline 模型中：
+* Accuracy ≈ 0.80
+* Precision ≈ 0.65
+* Recall ≈ 0.57
+
+📌 问题：模型会漏掉较多真实流失用户（Recall 偏低）
+---
+
+# 优化思路
+
+不直接使用默认 threshold=0.5，而是：
+👉 遍历不同 threshold
+👉 计算 Precision / Recall / F1
+👉 找到 F1-score 最大的 threshold
+
+---
+# 关键代码
+```python
+thresholds = np.linspace(0,1,50)
+
+for t in thresholds:
+    y_pred_new = (y_prob > t).astype(int)
+```
+
+# 最优结果
+* Best threshold ≈ 0.41
+* Best F1 ≈ 0.63
+---
+
+# 优化效果
+| 指标        | baseline | 优化后        |
+| --------- | -------- | ---------- |
+| Recall    | 0.57     | **0.68 ↑** |
+| Precision | 0.65     | 0.58 ↓     |
+---
+
+# 结论
+📌 降低 threshold 后：
+* 能抓住更多流失用户（Recall 提升）
+* 但误判有所增加（Precision 下降）
+👉 属于典型的 **Precision-Recall trade-off**
+
+---
+# 最终模型策略
+选择较低 threshold（≈0.41）：
+👉 更适合“流失预警”场景
+👉 优先减少漏掉高风险用户
+
+---
+# 项目总结
+本项目完成了：
+* 数据清洗（TotalCharges）
+* EDA分析（用户行为特征）
+* Logistic 回归建模
+* 阈值优化（业务导向决策）
+
+📌 核心提升：
+* 理解 Recall / Precision 的业务意义
+* 掌握 threshold 调整方法
+* 能基于业务目标优化模型
+
 ---
