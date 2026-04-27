@@ -632,3 +632,43 @@ for t in thresholds:
 # 综合结论
 在 churn 预测场景中，更关注 Recall（减少漏判），因此 XGBoost 更适合作为实际应用模型。
 同时，通过 threshold tuning，可以进一步在 Precision 和 Recall 之间进行权衡，实现业务目标优化。
+
+## Day 25+26 NLP_Text_Classification and Compare —— IMDB 文本情感分类（模型对比）
+# 本项目基于 IMDB 影评数据集，完成文本情感分类任务（正面 / 负面），并对比了不同机器学习模型在同一任务下的表现差异。
+# 数据集:
+- 数据来源：IMDB Dataset（本地 CSV）
+- 数据规模：50,000 条影评
+- 标签：positive → 1（正面） && negative → 0（负面）
+# 方法流程
+- 整体 pipeline:文本 → TF-IDF 向量化 → 模型训练 → 分类预测
+- 文本向量化（TF-IDF）作用：1.将文本转换为数值特征  2.降低高频无意义词（如 the / and）的影响  3.强化具有区分能力的词（如 amazing / terrible
+# 模型对比
+① Logistic Regression（逻辑回归）
+- 每个词对应一个权重（coef）
+- 能较好利用 TF-IDF 特征
+- 对文本分类任务表现稳定
+② Multinomial Naive Bayes（朴素贝叶斯）
+- 基于词频概率进行分类
+- 假设词之间相互独立
+- 计算简单，训练速度快
+# 实验结果
+| 模型                  | Accuracy | 特点        |
+| ------------------- | -------- | --------- |
+| Logistic Regression | 0.90     | 表现稳定，整体更优 |
+| Naive Bayes         | 0.89     | 速度快，但略有偏差(正分类上的recall较低) |
+- 原因分析（关键理解）：Naive Bayes 的核心假设——词之间相互独立，但在真实语言中not good ≠ good，模型无法理解“词之间的组合关系”，导致在复杂表达（如否定句）中容易误判。
+# 模型理解（进阶）
+通过分析 LogisticRegression 的 coef 发现模型已学到情感特征：
+- 正权重词：great / excellent / amazing
+- 负权重词：bad / worst / terrible
+同时也发现：it / and 等词也可能出现权重，是因为模型学习的是“统计相关性”，而非语义理解
+# 项目收获
+通过本项目，我完成了：
+- 从结构化数据 → NLP 的过渡
+- 理解 TF-IDF 的作用
+- 掌握文本分类基本 pipeline
+- 能够分析不同模型的表现差异
+# 总结：
+Logistic Regression 在文本分类任务中表现更稳定，
+而 Naive Bayes 虽然简单高效，但由于独立性假设，
+在复杂语言结构中表现受限。
